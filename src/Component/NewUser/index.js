@@ -16,7 +16,6 @@ class NewUser extends Component{
         })
     }
     render(){
-        console.log(this.state)
         return (
             <div className='content'>
                 <Form user={this.state.userMas} updateProps={this.updateProps}/>
