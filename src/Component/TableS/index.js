@@ -13,14 +13,14 @@ class TableS extends Component{
     }
     focusRadio(e){
       this.setState({
-        value: e.target.value
+        value: Number(e.target.value)
       })
     }
     deleteUser(e){
       const mas = this.state.userMas
       mas.map((el, index) => {
         console.log(el.id+" "+this.state.value)
-        if(el.id == this.state.value) {
+        if(el.id === this.state.value) {
           this.state.userMas.splice(index, 1)
           this.setState({}) 
         }
@@ -35,7 +35,7 @@ class TableS extends Component{
           but = <Button bsStyle="danger" onClick={this.deleteUser}>DELETE USER</Button>
           mas = userMas.map((i,index)=>{
             return (
-              <tr className='select'>
+              <tr key={index} className='select'>
                 <td>{++index}</td>
                 <td>{i.Fname}</td>
                 <td>{i.Sname}</td>
@@ -47,7 +47,7 @@ class TableS extends Component{
         if(this.state.component==='newuser'){
           mas = userMas.map((i,index)=>{
             return (
-              <tr className='select'>
+              <tr key={index} className='select'>
                 <td>{++index}</td>
                 <td>{i.Fname}</td>
                 <td>{i.Sname}</td>
