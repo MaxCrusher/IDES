@@ -33,8 +33,7 @@ class FormExample extends Component {
       let id = this.props.mas[this.props.mas.length-1].id
       const user = {id: id+1, Fname: this.state.valueF, Sname: this.state.valueS}
       store.dispatch(Actions.addUser(user, this.props.mas))
-      this.props.updateProps(true)
-      console.log(this.props)
+      this.props.updateProps()
     }
     handleChange(e) {
         e.target.name === 'FirstName' ?
@@ -42,9 +41,7 @@ class FormExample extends Component {
             this.setState({ valueS: e.target.value})
     }
   
-    render() {
-      console.log('form')
-      console.log(this.props.mas)   
+    render() { 
       return (
         <form>
           <FormGroup

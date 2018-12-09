@@ -8,15 +8,20 @@ import Form from '../Form'
 class NewUser extends Component{
     constructor(props){
         super(props)
+        this.state = {
+            update: false
+        }
     }
-    updateProps = (tr) =>{
-        this.setState({})
+    updateProps = () =>{
+        this.setState({
+            update: true
+        })
     }
     render(){
         return (
             <div className='content'>
                 <Form updateProps={this.updateProps}/>
-                <TableS component='newuser'/>
+                <TableS update={this.state.update} component='newuser'/>
             </div>
         )
     }

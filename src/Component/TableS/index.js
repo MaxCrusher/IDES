@@ -25,11 +25,8 @@ class TableS extends Component{
           store.dispatch(Actions.deleteUser(el, this.props.mas))
         }
       })
-      this.setState({})
     }
     render(){
-      console.log('table')
-      console.log(this.props.mas)
         let mas = null
         let but = null
         if(this.state.component==='delete'){
