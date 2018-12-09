@@ -1,6 +1,5 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 import './index.css';
 import TableS from '../TableS'
 import Form from '../Form'

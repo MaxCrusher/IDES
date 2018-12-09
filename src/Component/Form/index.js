@@ -6,15 +6,14 @@ import * as Actions from '../../Actions/action'
 import store from '../../store.js'
 
 class FormExample extends Component {
-    constructor(props, context) {
-      super(props, context);
+    constructor(props) {
+      super(props);
   
       this.handleChange = this.handleChange.bind(this);
       this.SaveUser = this.SaveUser.bind(this);
       this.state = {
         valueF: '',
-        valueS: '',
-        userMas: props.user
+        valueS: ''
       };
     }
     

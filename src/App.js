@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-//import { Button } from 'react-bootstrap'
 import { Button } from "react-bootstrap"
 import DeleteUser from './Component/DeleteUser/'
 import Main from './Component/Main/'
 import NewUser from './Component/NewUser/'
-import USER from './user.js'
 
 class App extends Component {
   
@@ -28,8 +26,8 @@ class App extends Component {
           </header>
           
           <Route path="/" exact render={() => <Main/>}/>
-          <Route path="/deleteuser" exact render={() => <DeleteUser user = { USER }/>}/>
-          <Route path="/newuser" exact render={() => <NewUser user = { USER }/>}/>
+          <Route path="/deleteuser" exact render={() => <DeleteUser/>}/>
+          <Route path="/newuser" exact render={() => <NewUser/>}/>
         </div>
         </div>
       </Router>
