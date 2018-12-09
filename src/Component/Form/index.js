@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 import { FormGroup, FormControl, ControlLabel, Button} from 'react-bootstrap'
+import * as Actions from '../../Actions/action'
+import store from '../../store.js'
 
 class FormExample extends Component {
     constructor(props, context) {
@@ -26,9 +30,11 @@ class FormExample extends Component {
         }
     }
     SaveUser(){
-      let id = this.state.userMas[this.state.userMas.length-1].id
-      this.state.userMas.push({id: id+1, Fname: this.state.valueF, Sname: this.state.valueS})
-      this.props.updateProps({userMas: this.state.userMas})
+      let id = this.props.mas[this.props.mas.length-1].id
+      const user = {id: id+1, Fname: this.state.valueF, Sname: this.state.valueS}
+      store.dispatch(Actions.addUser(user, this.props.mas))
+      this.props.updateProps(true)
+      console.log(this.props)
     }
     handleChange(e) {
         e.target.name === 'FirstName' ?
@@ -36,7 +42,9 @@ class FormExample extends Component {
             this.setState({ valueS: e.target.value})
     }
   
-    render() {   
+    render() {
+      console.log('form')
+      console.log(this.props.mas)   
       return (
         <form>
           <FormGroup
@@ -66,5 +74,15 @@ class FormExample extends Component {
       );
     }
   }
+  function mapStateToProps(state) {
+    return {
+      mas: state.mas.mas
+    }
+  }
+  function mapDispatchToProps(dispatch) {
+    return {
+      Actions: bindActionCreators(Actions, dispatch),
+    }
+  }
   
- export default FormExample
+ export default connect(mapStateToProps, mapDispatchToProps)(FormExample)
