@@ -12,9 +12,7 @@ class NewUser extends Component{
         }
     }
     updateProps = () =>{
-        this.setState({
-            update: true
-        })
+        this.state.update ? this.setState({ update: false }) : this.setState({ update: true })
     }
     render(){
         return (
