@@ -10,34 +10,37 @@ class FormExample extends Component {
       super(props);
   
       this.handleChange = this.handleChange.bind(this);
+      this.validationState = this.validationState.bind(this)
       this.SaveUser = this.SaveUser.bind(this);
       this.state = {
         valueF: '',
-        valueS: ''
+        valueS: '',
+        validation: false,
+        validationState: 'error'
       };
     }
-    
-    getValidationState() {
-      if(this.state.valueF.match(/\d/) === null && this.state.valueS.match(/\d/) === null) {
-        if(this.state.valueF.length > 1 && this.state.valueS.length > 1) {
-          return 'success'          
-        } else {
-          return 'error'
-        }
-        } else {
-            return 'error'
-        }
-    }
     SaveUser(){
-      let id = this.props.mas[this.props.mas.length-1].id
-      const user = {id: id+1, Fname: this.state.valueF, Sname: this.state.valueS}
-      store.dispatch(Actions.addUser(user, this.props.mas))
-      this.props.updateProps()
+      if (this.state.validation) {
+        let id = this.props.mas[this.props.mas.length - 1].id;
+        const user = { id: id + 1, Fname: this.state.valueF, Sname: this.state.valueS };
+        store.dispatch(Actions.addUser(user, this.props.mas));
+        this.props.updateProps();
+        this.setState({ valueF: "", valueS: "", validation: false, validationState: 'error' });
+      } else {
+        alert('Заполните все поля, минимальное кол-во символов 2')
+      }
+    }
+    validationState(){
+      if (this.state.valueF.match(/\d/) === null && this.state.valueS.match(/\d/) === null) {
+        if (this.state.valueF.length > 1 && this.state.valueS.length > 1) {
+          this.setState({validationState: 'success', validation: true})
+        }
+      }
     }
     handleChange(e) {
         e.target.name === 'FirstName' ?
-            this.setState({ valueF: e.target.value}) :
-            this.setState({ valueS: e.target.value})
+            this.setState({ valueF: e.target.value}, this.validationState) :
+            this.setState({ valueS: e.target.value}, this.validationState)
     }
   
     render() { 
@@ -45,7 +48,7 @@ class FormExample extends Component {
         <form>
           <FormGroup
             controlId="formBasicText"
-            validationState={this.getValidationState()}
+            validationState={this.state.validationState}
           >
             <ControlLabel>First Name</ControlLabel>
             <FormControl
